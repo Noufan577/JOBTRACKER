@@ -13,10 +13,11 @@ import {
 } from "./ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import SignOutButton from "./sign-out-btn";
-import { useSession } from "@/lib/auth/auth-client";
+import { useSession } from "@/lib/auth/auth-client"; // 👈 Client auth
 
 export default function Navbar() {
-  const { data: session } = useSession();
+  const { data: session } = useSession(); // 👈 Does not call headers() on server
+
   return (
     <nav className="border-b border-gray-200 bg-white">
       <div className="container mx-auto flex h-16 items-center px-4 justify-between">
@@ -39,6 +40,7 @@ export default function Navbar() {
                 </Button>
               </Link>
               <DropdownMenu>
+                {/* Note: Do not nest <Button> inside <DropdownMenuTrigger> */}
                 <DropdownMenuTrigger className="relative flex h-8 w-8 rounded-full items-center justify-center cursor-pointer outline-none hover:opacity-80 focus-visible:ring-2 focus-visible:ring-ring">
                   <Avatar className="h-8 w-8">
                     <AvatarFallback className="bg-primary text-white">
